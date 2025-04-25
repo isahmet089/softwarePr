@@ -1,0 +1,16 @@
+[
+    {
+      "from": "İzmir",
+      "to": "Bodrum",
+      "type": "Otobüs",
+      "price": 320,
+      "departure_time": "09:00",
+      "arrival_time": "13:30",
+      "duration": "4s 30d",
+      "company": "Pamukkale Turizm",
+      "departure_station": "İzmir Otogarı",
+      "arrival_station": "Bodrum Otogarı",
+      "departure_date": "2025-05-01",
+      "arrival_date": "2025-05-01"
+    }
+  ]

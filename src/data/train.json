@@ -1,0 +1,16 @@
+[
+    {
+      "from": "Ankara",
+      "to": "Eskişehir",
+      "type": "Tren",
+      "price": 220,
+      "departure_time": "10:15",
+      "arrival_time": "11:45",
+      "duration": "1s 30d",
+      "company": "TCDD Yüksek Hızlı Tren",
+      "departure_station": "Ankara YHT Garı",
+      "arrival_station": "Eskişehir Garı",
+      "departure_date": "2025-05-07",
+      "arrival_date": "2025-05-07"
+    }
+  ]
