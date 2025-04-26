@@ -434,3 +434,8 @@ body {
         width: 100%;
     }
 }
+datalist {
+    position: absolute; /* veya relative */
+    z-index: 9999;  /* Yüksek bir z-index değeri */
+    display: block;  /* Görünür yapmak için block değeri */
+}

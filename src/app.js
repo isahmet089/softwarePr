@@ -7,14 +7,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
-const voyageRouter = require('./routes/voyageRouter');
 
+const transportRouter = require('./routes/transportRouter.js');
 
-app.use('/api/voyage', voyageRouter);
+app.use('/api', transportRouter);
 
-//home page route   
 app.get('/', (req, res) => {
-    res.render('home');
-  });
+    res.render('home',{results:null});
+});
 
 module.exports = app;

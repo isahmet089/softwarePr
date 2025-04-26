@@ -5,3 +5,6 @@ document.querySelectorAll('.search-tab').forEach(tab => {
     tab.classList.add('active');
   });
 });
+
+
+  

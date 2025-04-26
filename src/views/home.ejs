@@ -24,43 +24,43 @@
                 <div class="search-tab">Tren</div>
             </div>
             
-            <form class="search-form">
-                <div class="search-input">
-                    <select>
-                        <option value="" disabled selected>Nereden</option>
-                        <option value="istanbul">İstanbul</option>
-                        <option value="ankara">Ankara</option>
-                        <option value="izmir">İzmir</option>
-                        <option value="antalya">Antalya</option>
-                    </select>
+            <form class="search-form" action="/api/search" method="POST">
+                <div class="search-input" value>
+                  <select id="from"  name="from">
+                    <option value="İstanbul" >Nereden</option>
+                    <option value="İstanbul">İstanbul</option>
+                    <option value="Ankara">Ankara</option>
+                    <option value="İzmir">İzmir</option>
+                    <option value="Antalya">Antalya</option>
+                    
+                  </select>
                 </div>
-                
+              
                 <div class="search-input">
-                    <select>
-                        <option value="" disabled selected>Nereye</option>
-                        <option value="istanbul">İstanbul</option>
-                        <option value="ankara">Ankara</option>
-                        <option value="izmir">İzmir</option>
-                        <option value="antalya">Antalya</option>
-                    </select>
+                  <select id="to" name="to" >
+                    <option value="Ankara" >Nereye</option>
+                    <option value="İstanbul">İstanbul</option>
+                    <option value="Ankara">Ankara</option>
+                    <option value="İzmir">İzmir</option>
+                    <option value="Antalya">Antalya</option>
+                  </select>
                 </div>
-                
+              
                 <div class="search-input">
-                    <input type="date" placeholder="Gidiş Tarihi">
+                  <input type="date" id="date" name="date" placeholder="Gidiş Tarihi" value="2025-04-26">
                 </div>
-                
+              
                 <div class="search-input">
-                    <select>
-                        <option value="" disabled selected>Yolcu</option>
-                        <option value="1">1 Yolcu</option>
-                        <option value="2">2 Yolcu</option>
-                        <option value="3">3 Yolcu</option>
-                        <option value="4">4 Yolcu</option>
-                    </select>
+                  <select id="type" name="type">
+                    <option value="bus" >Type</option>
+                    <option value="plane">Uçak</option>
+                    <option value="train">Tren</option>
+                    <option value="bus">Otobüs</option>
+                  </select>
                 </div>
-                
+              
                 <button type="submit" class="search-button">Ara</button>
-            </form>
+              </form>
         </div>
     </div>
     
@@ -69,234 +69,60 @@
             <h2>Popüler Rotalar</h2>
             <p>En çok tercih edilen seyahat rotaları</p>
         </div>
-        
         <div class="ticket-list">
-            <!-- Bilet 1 -->
-            <div class="ticket-card">
-                <div class="popular-badge">En Popüler</div>
-                
-                <div class="ticket-content">
-                    <div>
-                        <div class="ticket-type">Bugün</div>
-                        <div class="ticket-type">24-07-2023</div>
-                        <div class="ticket-type">Uçak</div>
-                        <div class="ticket-route">İstanbul → Antalya</div>
-                        <div class="ticket-details">
-                            <div class="ticket-detail-item">
-                                <div class="ticket-detail-icon">🛫</div>
-                                <div class="ticket-detail-text">
-                                    <strong>08:30</strong>
-                                    <span>İstanbul Havalimanı</span>
-                                </div>
-                            </div>
-                            <div class="ticket-detail-item">
-                                <div class="ticket-detail-icon">🛬</div>
-                                <div class="ticket-detail-text">
-                                    <strong>09:45</strong>
-                                    <span>Antalya Havalimanı</span>
-                                </div>
-                            </div>
-                            <div class="ticket-detail-item">
-                                <div class="ticket-detail-icon">⏱️</div>
-                                <div class="ticket-detail-text">
-                                    <strong>1s 15d</strong>
-                                    <span>Direkt Uçuş</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ticket-bottom">
-                        <div class="ticket-company">
-                            <div class="company-logo">✈️</div>
-                            <div class="company-name">Türk Hava Yolları</div>
-                        </div>
-                        <div class="ticket-price-action">
-                            <div class="price-value">₺1.250</div>
-                            <button class="ticket-button">Seç</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
             
-            <!-- Bilet 2 -->
-            <div class="ticket-card">
-                <div class="discount-badge">%15 İndirim</div>
-                
-                <div class="ticket-content">
-                    <div>
-                        <div class="ticket-type">Otobüs</div>
-                        <div class="ticket-route">İstanbul → Ankara</div>
-                        <div class="ticket-details">
-                            <div class="ticket-detail-item">
-                                <div class="ticket-detail-icon">🚏</div>
-                                <div class="ticket-detail-text">
-                                    <strong>22:00</strong>
-                                    <span>İstanbul Otogarı</span>
+            <% if (results && results.length > 0) { %>
+                <% results.forEach(function(ticket) { %>
+                    <div class="ticket-card">
+                        <div class="popular-badge">En Popüler</div>
+                        <div class="ticket-content">
+                            <div>
+                                <div class="ticket-type"><%= ticket.type %></div>
+                                <div class="ticket-type"><%= new Date(ticket.date).toLocaleDateString('tr-TR') %></div>
+                                <div class="ticket-date"><%= ticket.departure_date %></div>
+                                <div class="ticket-route"><%= ticket.from %> → <%= ticket.to %></div>
+                                <div class="ticket-details">
+                                    <div class="ticket-detail-item">
+                                        <div class="ticket-detail-icon">🚏</div>
+                                        <div class="ticket-detail-text">
+                                            <strong><%= ticket.departure_time %></strong>
+                                            <span><%= ticket.departure_station %></span>
+                                        </div>
+                                    </div>
+                                    <div class="ticket-detail-item">
+                                        <div class="ticket-detail-icon">🏁</div>
+                                        <div class="ticket-detail-text">
+                                            <strong><%= ticket.arrival_time %></strong>
+                                            <span><%= ticket.arrival_station %></span>
+                                        </div>
+                                    </div>
+                                    <div class="ticket-detail-item">
+                                        <div class="ticket-detail-icon">⏱️</div>
+                                        <div class="ticket-detail-text">
+                                            <strong><%= ticket.duration %></strong>
+                                            <span>Molalı Yolculuk</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="ticket-detail-item">
-                                <div class="ticket-detail-icon">🏁</div>
-                                <div class="ticket-detail-text">
-                                    <strong>05:30</strong>
-                                    <span>Ankara AŞTİ</span>
+                            <div class="ticket-bottom">
+                                <div class="ticket-company">
+                                    <div class="company-logo">🚌</div>
+                                    <div class="company-name"><%= ticket.company %></div>
                                 </div>
-                            </div>
-                            <div class="ticket-detail-item">
-                                <div class="ticket-detail-icon">⏱️</div>
-                                <div class="ticket-detail-text">
-                                    <strong>7s 30d</strong>
-                                    <span>Molalı Yolculuk</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ticket-bottom">
-                        <div class="ticket-company">
-                            <div class="company-logo">🚌</div>
-                            <div class="company-name">Metro Turizm</div>
-                        </div>
-                        <div class="ticket-price-action">
-                            <div class="price-value">₺450</div>
-                            <button class="ticket-button">Seç</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Bilet 3 -->
-            <div class="ticket-card">
-                
-                <div class="ticket-content">
-                    <div>
-                        <div class="ticket-type">Tren</div>
-                        <div class="ticket-route">Ankara → Eskişehir</div>
-                        <div class="ticket-details">
-                            <div class="ticket-detail-item">
-                                <div class="ticket-detail-icon">🚉</div>
-                                <div class="ticket-detail-text">
-                                    <strong>10:15</strong>
-                                    <span>Ankara YHT Garı</span>
-                                </div>
-                            </div>
-                            <div class="ticket-detail-item">
-                                <div class="ticket-detail-icon">🏁</div>
-                                <div class="ticket-detail-text">
-                                    <strong>11:45</strong>
-                                    <span>Eskişehir Garı</span>
-                                </div>
-                            </div>
-                            <div class="ticket-detail-item">
-                                <div class="ticket-detail-icon">⏱️</div>
-                                <div class="ticket-detail-text">
-                                    <strong>1s 30d</strong>
-                                    <span>Yüksek Hızlı Tren</span>
+                                <div class="ticket-price-action">
+                                    <div class="price-value">₺<%= ticket.price %></div>
+                                    <button class="ticket-button">Seç</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="ticket-bottom">
-                        <div class="ticket-company">
-                            <div class="company-logo">🚆</div>
-                            <div class="company-name">TCDD Yüksek Hızlı Tren</div>
-                        </div>
-                        <div class="ticket-price-action">
-                            <div class="price-value">₺220</div>
-                            <button class="ticket-button">Seç</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Bilet 4 -->
-            <div class="ticket-card">
-                <div class="discount-badge">%10 İndirim</div>
-               
-                <div class="ticket-content">
-                    <div>
-                        <div class="ticket-type">Uçak</div>
-                        <div class="ticket-route">İstanbul → İzmir</div>
-                        <div class="ticket-details">
-                            <div class="ticket-detail-item">
-                                <div class="ticket-detail-icon">🛫</div>
-                                <div class="ticket-detail-text">
-                                    <strong>14:20</strong>
-                                    <span>İstanbul Sabiha Gökçen</span>
-                                </div>
-                            </div>
-                            <div class="ticket-detail-item">
-                                <div class="ticket-detail-icon">🛬</div>
-                                <div class="ticket-detail-text">
-                                    <strong>15:25</strong>
-                                    <span>İzmir Adnan Menderes</span>
-                                </div>
-                            </div>
-                            <div class="ticket-detail-item">
-                                <div class="ticket-detail-icon">⏱️</div>
-                                <div class="ticket-detail-text">
-                                    <strong>1s 5d</strong>
-                                    <span>Direkt Uçuş</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ticket-bottom">
-                        <div class="ticket-company">
-                            <div class="company-logo">✈️</div>
-                            <div class="company-name">Pegasus</div>
-                        </div>
-                        <div class="ticket-price-action">
-                            <div class="price-value">₺899</div>
-                            <button class="ticket-button">Seç</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Bilet 5 -->
-            <div class="ticket-card">
-                
-                <div class="ticket-content">
-                    <div>
-                        <div class="ticket-type">Otobüs</div>
-                        <div class="ticket-route">İzmir → Bodrum</div>
-                        <div class="ticket-details">
-                            <div class="ticket-detail-item">
-                                <div class="ticket-detail-icon">🚏</div>
-                                <div class="ticket-detail-text">
-                                    <strong>09:00</strong>
-                                    <span>İzmir Otogarı</span>
-                                </div>
-                            </div>
-                            <div class="ticket-detail-item">
-                                <div class="ticket-detail-icon">🏁</div>
-                                <div class="ticket-detail-text">
-                                    <strong>13:30</strong>
-                                    <span>Bodrum Otogarı</span>
-                                </div>
-                            </div>
-                            <div class="ticket-detail-item">
-                                <div class="ticket-detail-icon">⏱️</div>
-                                <div class="ticket-detail-text">
-                                    <strong>4s 30d</strong>
-                                    <span>Molalı Yolculuk</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ticket-bottom">
-                        <div class="ticket-company">
-                            <div class="company-logo">🚌</div>
-                            <div class="company-name">Pamukkale Turizm</div>
-                        </div>
-                        <div class="ticket-price-action">
-                            <div class="price-value">₺320</div>
-                            <button class="ticket-button">Seç</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <% }); %>
+            <% } else { %>
+                <p>Aradığınız kriterlere uygun bilet bulunamadı.</p>
+            <% } %>
         </div>
+        
     </div>
 </body>
-</html>
-<script src="/js.js"></script>
+</html><script src="/js.js"></script>
