@@ -59,5 +59,10 @@ app.get('/payment',(req,res)=>{
 app.get('/payment-success',(req,res)=>{
     res.render('payment-success');
 })
+app.get("/:id" ,async (req, res) => {
+    const { id } = req.params;
+    res.render("payment-success", { id });
+}
+);
 
 module.exports = app;

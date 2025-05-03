@@ -22,16 +22,39 @@
             <p>Hesabınızdan güvenli bir şekilde çıkış yapılıyor</p>
         </div>
         
-        <div class="loading"></div>
+        <div class="loading">
+            
+        </div>
         
         <div class="message">Lütfen bekleyin, çıkış işleminiz gerçekleştiriliyor...</div>
         
         <div id="buttons" style="display: none;">
-            <a href="index.html" class="btn">Ana Sayfaya Dön</a>
-            <a href="login.html" class="btn btn-outline">Tekrar Giriş Yap</a>
+            <a href="/home" class="btn">Ana Sayfaya Dön</a>
+            <a href="/login" class="btn btn-outline">Tekrar Giriş Yap</a>
         </div>
     </div>
     
    
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Simulate logout process
+        setTimeout(function() {
+            // Clear user data from localStorage
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('userName');
+            localStorage.removeItem('userType');
+            
+            // Hide loading indicator
+            document.querySelector('.loading').style.display = 'none';
+            
+            // Update message
+            document.querySelector('.message').textContent = 'Çıkış işleminiz başarıyla tamamlandı.';
+            
+            // Show buttons
+            document.getElementById('buttons').style.display = 'block';
+        }, 2000); // 2 seconds delay for simulation
+    });
+</script>
 </html>
