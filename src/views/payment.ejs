@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ödeme Sayfası</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/payment.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <h1>Bilet Arama</h1>
+            </div>
+            <div class="user-menu">
+                <a href="/home">Ana Sayfa</a>
+               
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="page-title">
+            <h1>Ödeme</h1>
+            <p>Biletinizi güvenle satın alın</p>
+        </div>
+        
+        <div class="steps">
+            <div class="step completed">
+                <div class="step-number">1</div>
+                <div class="step-name">Bilet Seçimi</div>
+            </div>
+            <div class="step active">
+                <div class="step-number">2</div>
+                <div class="step-name">Ödeme</div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-name">Onay</div>
+            </div>
+        </div>
+        
+        <div class="checkout-container">
+            <div class="checkout-form">
+                <div class="form-section">
+                    <h2 class="section-title">Yolcu Bilgileri</h2>
+                    <div class="form-group">
+                        <label for="passenger-name">Ad Soyad</label>
+                        <input type="text" id="passenger-name" class="form-control" placeholder="Yolcunun adı ve soyadı" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="passenger-tc">T.C. Kimlik No</label>
+                            <input type="text" id="passenger-tc" class="form-control" placeholder="11 haneli T.C. Kimlik No" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="passenger-birth">Doğum Tarihi</label>
+                            <input type="date" id="passenger-birth" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="passenger-phone">Telefon</label>
+                            <input type="tel" id="passenger-phone" class="form-control" placeholder="Telefon numarası" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="passenger-email">E-posta</label>
+                            <input type="email" id="passenger-email" class="form-control" placeholder="E-posta adresi" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h2 class="section-title">Ödeme Yöntemi</h2>
+                    
+                    <div class="payment-methods">
+                        <div class="payment-method active">
+                            <div class="payment-method-icon">💳</div>
+                            <div class="payment-method-name">Kredi Kartı</div>
+                        </div>
+                        <div class="payment-method">
+                            <div class="payment-method-icon">🏦</div>
+                            <div class="payment-method-name">Havale/EFT</div>
+                        </div>
+                        <div class="payment-method">
+                            <div class="payment-method-icon">📱</div>
+                            <div class="payment-method-name">Online Ödeme</div>
+                        </div>
+                    </div>
+                    
+                    <div id="credit-card-form">
+                        <div class="card-icons">
+                            <div class="card-icon">VISA</div>
+                            <div class="card-icon">MC</div>
+                            <div class="card-icon">AMEX</div>
+                            <div class="card-icon">TROY</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="card-number">Kart Numarası</label>
+                            <input type="text" id="card-number" class="form-control" placeholder="1234 5678 9012 3456" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="card-name">Kart Üzerindeki İsim</label>
+                                <input type="text" id="card-name" class="form-control" placeholder="Kart sahibinin adı" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="card-expiry">Son Kullanma Tarihi</label>
+                                <input type="text" id="card-expiry" class="form-control" placeholder="AA/YY" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="card-cvv">CVV</label>
+                                <input type="text" id="card-cvv" class="form-control" placeholder="123" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-success" onclick="window.location.href='/payment-success'">Ödemeyi Tamamla</button>
+            </div>
+            
+            <div class="order-summary">
+                <h2 class="section-title">Sipariş Özeti</h2>
+                
+                <div class="ticket-summary">
+                    <div class="ticket-route"><%= ticket.from %> → <%= ticket.to %></div>
+                    
+                    <div class="ticket-details">
+                        <div class="ticket-detail-item">
+                            <div class="ticket-detail-label">Tarih</div>
+                            <div class="ticket-detail-value"><%= new Date(ticket.date).toLocaleDateString('tr-TR')  %></div>
+                        </div>
+                        
+                        <div class="ticket-detail-item">
+                            <div class="ticket-detail-label">Saat</div>
+                            <div class="ticket-detail-value"><%= ticket.departure_time  %></div>
+                        </div>
+                        
+                        <div class="ticket-detail-item">
+                            <div class="ticket-detail-label">Firma</div>
+                            <div class="ticket-detail-value"><%= ticket.company %></div>
+                        </div>
+                        
+                        <div class="ticket-detail-item">
+                            <div class="ticket-detail-label">Yolcu</div>
+                            <div class="ticket-detail-value">1 Yetişkin</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="price-summary">
+                    <div class="price-item">
+                        <div class="price-label">Bilet Ücreti</div>
+                        <div class="price-value">₺<%= ticket.price  %></div>
+                    </div>
+                    
+                    <div class="price-item">
+                        <div class="price-label">Hizmet Bedeli</div>
+                        <div class="price-value">₺<%= price.hizmetBedeli  %></div>
+                    </div>
+
+                    <div class="price-item">
+                        <div class="price-label">Vergiler</div>
+                        <div class="price-value"><%= price.kdv*100 + "%" %></div>
+                    </div>
+                    
+                    <div class="price-item">
+                        <div class="price-label">İndirim</div>
+                        <div class="price-value"><%= indirim*100 + "%" %></div>
+                    </div>
+                    <div class="price-item">
+                        <div class="price-label">Kazancınız</div>
+                        <div class="price-value "><%= (price.toplamFiyat*indirim).toFixed(2) %></div>
+                    </div>
+
+                    <div class="price-total">
+                        <div class="price-label">Toplam</div>
+                        <div class="price-value">₺<%= Number(price.toplamFiyat-(price.toplamFiyat*indirim)).toFixed(2)  %></div>    
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="/home" class="back-link">Bilet Aramaya Geri Dön</a>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Payment method selection
+            const paymentMethods = document.querySelectorAll('.payment-method');
+            
+            paymentMethods.forEach(method => {
+                method.addEventListener('click', () => {
+                    // Remove active class from all methods
+                    paymentMethods.forEach(m => m.classList.remove('active'));
+                    
+                    // Add active class to clicked method
+                    method.classList.add('active');
+                    
+                    // Show/hide credit card form based on selection
+                    const creditCardForm = document.getElementById('credit-card-form');
+                    if (method.querySelector('.payment-method-name').textContent === 'Kredi Kartı') {
+                        creditCardForm.style.display = 'block';
+                    } else {
+                        creditCardForm.style.display = 'none';
+                    }
+                });
+            });
+            
+            // Form validation would go here in a real application
+        });
+    </script>
+</body>
+</html>

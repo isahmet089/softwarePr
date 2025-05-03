@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ödeme Başarılı</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/payment-success.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <h1>Bilet Arama</h1>
+            </div>
+            <div class="user-menu">
+                <a href="/home">Ana Sayfa</a>
+              
+                
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="steps">
+            <div class="step completed">
+                <div class="step-number">1</div>
+                <div class="step-name">Bilet Seçimi</div>
+            </div>
+            <div class="step completed">
+                <div class="step-number">2</div>
+                <div class="step-name">Ödeme</div>
+            </div>
+            <div class="step completed">
+                <div class="step-number">3</div>
+                <div class="step-name">Onay</div>
+            </div>
+        </div>
+        
+        <div class="success-card">
+            <div class="success-icon">✓</div>
+            <h1 class="success-title">Ödeme Başarılı!</h1>
+            <p class="success-message">Biletiniz başarıyla satın alındı. Bilet detayları e-posta adresinize gönderildi.</p>
+            
+            <div class="qr-code">
+                Bilet QR Kodu
+            </div>
+            
+            <div class="ticket-details">
+                <div class="ticket-detail-row">
+                    <div class="ticket-detail-label">Bilet No</div>
+                    <div class="ticket-detail-value">TK12345678</div>
+                </div>
+                <div class="ticket-detail-row">
+                    <div class="ticket-detail-label">Rota</div>
+                    <div class="ticket-detail-value">İstanbul → Antalya</div>
+                </div>
+                <div class="ticket-detail-row">
+                    <div class="ticket-detail-label">Tarih</div>
+                    <div class="ticket-detail-value">15 Mayıs 2025</div>
+                </div>
+                <div class="ticket-detail-row">
+                    <div class="ticket-detail-label">Saat</div>
+                    <div class="ticket-detail-value">08:30</div>
+                </div>
+                <div class="ticket-detail-row">
+                    <div class="ticket-detail-label">Yolcu</div>
+                    <div class="ticket-detail-value">1 Yetişkin</div>
+                </div>
+                <div class="ticket-detail-row">
+                    <div class="ticket-detail-label">Toplam Ödenen</div>
+                    <div class="ticket-detail-value">₺1.350,00</div>
+                </div>
+            </div>
+            
+            <div>
+                <a href="#" class="btn">Bileti İndir</a>
+                <a href="/home" class="btn btn-outline">Ana Sayfaya Dön</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -10,6 +10,45 @@
     <link rel="stylesheet" href="/css.css">
 </head>                                     
 <body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <h1>Bilet Arama</h1>
+            </div>
+            <div class="user-menu">
+                <a href="/home">Ana Sayfa</a>
+                
+                
+                <!-- Giriş yapmamış kullanıcılar için -->
+                 <% if (!user) { %>
+                     <div id="guest-menu">
+                    <a href="/login">Giriş Yap </a>
+                </div>
+                <div id="guest-menu">
+                    <a href="/register">Kayıt Ol</a>
+                </div>
+                 <%  } %>
+                 <% if (user) { %>
+                    <div id="guest-menu">
+                        <a  href="/api/auth/logout">Çıkış Yap</a>
+                </div>
+                    <% } 
+                    %>
+               
+                
+                <!-- Giriş yapmış kullanıcılar için -->
+                
+                        <% if (user) { %>
+                            <div id="user-menu">
+                                <div class="user-info" id="user-dropdown-toggle">
+                                    <div class="user-avatar">👤</div>
+                            <div class="user-name" id="username"><%= user.name %></div>
+                          <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
     <div class="hero">
         <div class="hero-content">
             <h1 class="hero-title">Seyahatiniz Başlasın</h1>
@@ -18,14 +57,10 @@
         </div>
         
         <div class="search-container">
-            <div class="search-tabs">
-                <div class="search-tab active">Otobüs</div>
-                <div class="search-tab">Uçak</div>
-                <div class="search-tab">Tren</div>
-            </div>
+            
             
             <form class="search-form" action="/api/search" method="POST">
-                <div class="search-input" value>
+                <div class="search-input">
                   <select id="from"  name="from">
                     <option value="İstanbul" >Nereden</option>
                     <option value="İstanbul">İstanbul</option>
@@ -51,8 +86,8 @@
                 </div>
               
                 <div class="search-input">
-                  <select id="type" name="type">
-                    <option value="bus" >Type</option>
+                  <select id="type" name="type" aria-placeholder="Ulaşım Türü">
+                    <option value="bus" >Ulaşım Türü</option>
                     <option value="plane">Uçak</option>
                     <option value="train">Tren</option>
                     <option value="bus">Otobüs</option>
@@ -74,8 +109,21 @@
             <% if (results && results.length > 0) { %>
                 <% results.forEach(function(ticket) { %>
                     <div class="ticket-card">
-                        <div class="popular-badge">En Popüler</div>
-                        <div class="ticket-content">
+                        <% if (user) { %>
+                           
+                        
+                        <% if (user.userType == "ogrenci") { %>
+                            <div class="popular-badge">Öğrenci İndirimi</div>
+                        <% } %>
+                        <% if (user.userType == "ozel") { %>
+                            <div class="popular-badge">Özel Durum İndirimi</div>
+                        <% } %>
+                        
+                        <% if (user.userType == "yasli") { %>
+                            <div class="popular-badge">+65 Yaş İndirimi</div>
+                        <% } %>
+                        <% } %>
+                      <div class="ticket-content">
                             <div>
                                 <div class="ticket-type"><%= ticket.type %></div>
                                 <div class="ticket-type"><%= new Date(ticket.date).toLocaleDateString('tr-TR') %></div>
@@ -112,7 +160,8 @@
                                 </div>
                                 <div class="ticket-price-action">
                                     <div class="price-value">₺<%= ticket.price %></div>
-                                    <button class="ticket-button">Seç</button>
+                                    <a href="/api/payment/<%=ticket.type%>/<%= ticket._id %>" class="ticket-button">Seç</a>
+
                                 </div>
                             </div>
                         </div>

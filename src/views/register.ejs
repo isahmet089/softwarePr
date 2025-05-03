@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kayıt Ol</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/register.css">
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <h1>Bilet Arama</h1>
+        </div>
+        
+        <div class="page-title">
+            <h2>Kayıt Ol</h2>
+            <p>Yeni bir hesap oluşturarak bilet avantajlarından yararlanın</p>
+        </div>
+        
+        <form id="register-form" action="/api/auth/register" method="POST" >
+            <div class="form-group">
+              <label for="register-name">Ad Soyad</label>
+              <input type="text" id="register-name" name="name" class="form-control" placeholder="Adınız ve soyadınız" required>
+              <div class="error-message">Ad ve soyad giriniz.</div>
+            </div>
+          
+            <div class="form-group">
+              <label for="register-email">E-posta</label>
+              <input type="email" id="register-email" name="email" class="form-control" placeholder="E-posta adresiniz" required>
+              <div class="error-message">Geçerli bir e-posta adresi giriniz.</div>
+            </div>
+          
+            <div class="form-group">
+              <label for="register-phone">Telefon</label>
+              <input type="tel" id="register-phone" name="phone" class="form-control" placeholder="Telefon numaranız" required>
+              <div class="error-message">Geçerli bir telefon numarası giriniz.</div>
+            </div>
+          
+            <!-- Kullanıcı türü seçimi -->
+            <div class="form-group">
+              <label>Kullanıcı Türü</label>
+              <div class="user-type-options">
+                <div class="user-type-option" >
+                  <div class="user-type-icon">👤</div>
+                  <input type="radio" name="userType" value="yetiskin" required>
+                  Yetişkin
+                  <div class="user-type-description">Standart</div>
+                </div>
+                <div class="user-type-option" >
+                  <div class="user-type-icon">🎓</div>
+                  <input type="radio" name="userType" value="ogrenci">
+                     Öğrenci 
+                  <div class="user-type-description">%20 İndirim</div>
+                </div>
+                <div class="user-type-option" >
+                  <div class="user-type-icon">👵</div>
+                  <input type="radio" name="userType" value="yasli">
+                  65+ Yaş
+                  <div class="user-type-description">%30 İndirim</div>
+                </div>
+                <div class="user-type-option" >
+                  <div class="user-type-icon">♿</div>
+                  <input type="radio" name="userType" value="ozel">
+                  Engelli
+                  <div class="user-type-description">%50 İndirim</div>
+                </div>
+              </div>
+              
+              <div class="error-message">Kullanıcı türünüzü seçiniz.</div>
+            </div>
+          
+            <div class="form-group">
+              <label for="register-password">Şifre</label>
+              <input type="password" id="register-password" name="password" class="form-control" placeholder="Şifreniz (en az 8 karakter)" required minlength="8">
+              <div class="error-message">Şifreniz en az 8 karakter olmalıdır.</div>
+            </div>
+          
+            <div class="form-group">
+              <label for="register-password-confirm">Şifre Tekrar</label>
+              <input type="password" id="register-password-confirm" name="confirmPassword" class="form-control" placeholder="Şifrenizi tekrar girin" required>
+              <div class="error-message">Şifreler eşleşmiyor.</div>
+            </div>
+          
+            <div class="form-group" style="display: flex; align-items: flex-start;">
+              <input type="checkbox" id="terms" name="acceptedTerms" style="margin-right: 10px; margin-top: 5px;" required>
+              <label for="terms" style="font-size: 0.9rem; font-weight: normal;">
+                <a href="#" style="color: var(--primary);">Kullanım şartlarını</a> ve <a href="#" style="color: var(--primary);">Gizlilik politikasını</a> okudum ve kabul ediyorum.
+              </label>
+            </div>
+          
+            <button type="submit" class="btn">Kayıt Ol</button>
+          </form>
+        
+        <div class="form-footer">
+            <p>Zaten hesabınız var mı? <a href="login.html">Giriş yapın</a></p>
+        </div>
+        
+        <div class="links">
+            <a href="index.html" class="link">Ana Sayfaya Dön</a>
+        </div>
+    </div>
+    
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Kullanıcı türü seçimi
+            const userTypeOptions = document.querySelectorAll('.user-type-option');
+            const selectedUserTypeInput = document.getElementById('selected-user-type');
+            
+            userTypeOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    // Tüm seçeneklerden active sınıfını kaldır
+                    userTypeOptions.forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Tıklanan seçeneğe active sınıfını ekle
+                    option.classList.add('selected');
+                    
+                    // Gizli input'a değeri ata
+                    const value = option.getAttribute('data-value');
+                    selectedUserTypeInput.value = value;
+                });
+            });
+            
+            // Form validation
+            const registerForm = document.getElementById('register-form');
+            
+            registerForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const name = document.getElementById('register-name');
+                const email = document.getElementById('register-email');
+                const phone = document.getElementById('register-phone');
+                const userType = document.getElementById('selected-user-type');
+                const password = document.getElementById('register-password');
+                const passwordConfirm = document.getElementById('register-password-confirm');
+                let isValid = true;
+                
+                // Simple validation
+                if (!name.value) {
+                    name.parentElement.classList.add('error');
+                    isValid = false;
+                } else {
+                    name.parentElement.classList.remove('error');
+                }
+                
+                if (!email.value || !email.value.includes('@')) {
+                    email.parentElement.classList.add('error');
+                    isValid = false;
+                } else {
+                    email.parentElement.classList.remove('error');
+                }
+                
+                if (!phone.value) {
+                    phone.parentElement.classList.add('error');
+                    isValid = false;
+                } else {
+                    phone.parentElement.classList.remove('error');
+                }
+                
+                if (!userType.value) {
+                    userType.parentElement.classList.add('error');
+                    isValid = false;
+                } else {
+                    userType.parentElement.classList.remove('error');
+                }
+                
+                if (!password.value || password.value.length < 8) {
+                    password.parentElement.classList.add('error');
+                    isValid = false;
+                } else {
+                    password.parentElement.classList.remove('error');
+                }
+                
+                if (password.value !== passwordConfirm.value) {
+                    passwordConfirm.parentElement.classList.add('error');
+                    isValid = false;
+                } else {
+                    passwordConfirm.parentElement.classList.remove('error');
+                }
+                
+                if (isValid) {
+                    // Normally would submit to server, but for demo we'll redirect
+                    // Simulate registration and login
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('userEmail', email.value);
+                    localStorage.setItem('userName', name.value);
+                    localStorage.setItem('userType', userType.value);
+                    
+                  
+                }
+            });
+        });
+    </script> -->
+</body>
+</html>
