@@ -13,7 +13,7 @@ const mongoURI = process.env.MONGO_URI; // MongoDB bağlantı URI'si
 
 async function seedDatabase() {
   try {
-    const conn = await mongoose.connect("mongodb://localhost:27017/project");
+    const conn = await mongoose.connect("mongodb+srv://fatih123640:XYtaB1n9BStxNQow@cluster1.7jhqj.mongodb.net/testDers");
     console.log(`Mongo db bağlantısı başarılı  ${conn.connection.host}`);
 
     // Eski verileri temizle

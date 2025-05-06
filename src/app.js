@@ -9,13 +9,13 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 app.use(session({
-    secret: '15561561135', // .env dosyasına al: process.env.SESSION_SECRET
+    secret: '15561561135',
     resave: false,
     saveUninitialized: false,
     cookie: {
       maxAge: 1000 * 60 * 60 * 24, // 1 gün
       httpOnly: false,
-      secure: false // production'da true (https varsa)
+      secure: false 
     }
   }));
 
