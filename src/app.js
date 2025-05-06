@@ -19,13 +19,9 @@ app.use(session({
     }
   }));
 
-const authRouter = require('./routes/authRouter');
+const authRouter = require('./routes/authRouter.js');
 const transportRouter = require('./routes/transportRouter.js');
-const paymentRouter = require('./routes/paymentRouter');
-
-
-
-
+const paymentRouter = require('./routes/paymentRouter.js');
 
 app.use((req, res, next) => {
     res.locals.user = req.session.user || null;
